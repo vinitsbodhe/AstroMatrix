@@ -5,7 +5,7 @@ An end-to-end Python analytics engine and interactive dashboard that processes p
 ---
 
 ## 🚀 Live Demo & Repository
-* 🌐 **Live Web Application:** [Access Live Streamlit App](https://your-app-name.streamlit.app)
+* 🌐 **Live Web Application:** [Access Live Streamlit App]((https://astromatrix.streamlit.app/))
 
 ---
 
