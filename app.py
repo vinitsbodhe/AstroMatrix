@@ -4,9 +4,7 @@ import matplotlib.pyplot as plt
 import datetime
 from geopy.geocoders import Nominatim
 
-# ---------------------------------------------------------
-# 1. ASTRONOMICAL CONSTANTS & MAPS
-# ---------------------------------------------------------
+
 SIGN_RULERS = {
     1: 'Mars',    2: 'Venus',   3: 'Mercury', 4: 'Moon',
     5: 'Sun',     6: 'Mercury', 7: 'Venus',   8: 'Mars',
@@ -16,9 +14,6 @@ SIGN_RULERS = {
 RASHIS = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", 
           "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
 
-# ---------------------------------------------------------
-# 2. CORE RAJ YOG CALCULATION & SCORING ENGINE
-# ---------------------------------------------------------
 def get_coordinates(city_name):
     """Geocoding to get Latitude and Longitude"""
     try:
@@ -29,17 +24,17 @@ def get_coordinates(city_name):
         return 28.6139, 77.2090  # Default fallback: New Delhi
 
 def calculate_raj_yog_engine(year, month, day, hour_utc, lat, lon):
-    # Setup Swiss Ephemeris with Lahiri Ayanamsa (Vedic)
+ 
     julian_day = swe.julday(year, month, day, hour_utc)
     swe.set_sid_mode(swe.SIDM_LAHIRI)
     flags = swe.FLG_SIDEREAL | swe.FLG_SWIEPH
 
-    # Calculate Ascendant / Lagna
+    # Calculate Lagna
     cusps, ascmc = swe.houses_ex(julian_day, lat, lon, b'A', flags)
     asc_deg = ascmc[0]
     lagna_sign_idx = int(asc_deg // 30) + 1  # 1 to 12
 
-    # Map House Lords (1 to 12)
+    # Map House Lords 
     house_lords = {}
     for h in range(1, 13):
         sign_of_house = ((lagna_sign_idx - 1 + h - 1) % 12) + 1
@@ -63,7 +58,7 @@ def calculate_raj_yog_engine(year, month, day, hour_utc, lat, lon):
         h_num = ((p_sign_idx - lagna_sign_idx) % 12) + 1
         planet_houses[p_name] = h_num
 
-    # Check Combustion (Is planet within 6 degrees of Sun?)
+    # Check Combustion 
     sun_deg = planet_degrees['Sun']
     combust_planets = set()
     for p_name, p_deg in planet_degrees.items():
@@ -152,9 +147,7 @@ def calculate_raj_yog_engine(year, month, day, hour_utc, lat, lon):
     final_raj_yog_score = min(total_score, 100)
     return RASHIS[lagna_sign_idx - 1], planet_houses, lagna_sign_idx, final_raj_yog_score, detected_yogas
 
-# ---------------------------------------------------------
-# 3. CHART VISUALIZATION (North Indian Diamond Grid)
-# ---------------------------------------------------------
+#chart
 def draw_kundli_chart(lagna_num, planet_positions):
     fig, ax = plt.subplots(figsize=(5, 5))
     ax.set_xlim(0, 10)
@@ -187,9 +180,7 @@ def draw_kundli_chart(lagna_num, planet_positions):
 
     return fig
 
-# ---------------------------------------------------------
-# 4. STREAMLIT FRONTEND
-# ---------------------------------------------------------
+#streamlit
 st.set_page_config(page_title="MyNaksh - Raj Yog Intelligence", layout="wide")
 
 st.title("👑 Raj Yog Intelligence Engine")
