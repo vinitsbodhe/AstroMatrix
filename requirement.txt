@@ -1,4 +1,0 @@
-streamlit
-swisseph
-matplotlib
-geopy
