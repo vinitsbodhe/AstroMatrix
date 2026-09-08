@@ -4,8 +4,8 @@ An end-to-end Python analytics engine and interactive dashboard that processes p
 
 ---
 
-## 🚀 Live Demo & Repository
-* 🌐 **Live Web Application:** [Access Live Streamlit App]([https://astromatrix.streamlit.app])
+## 🚀 Live Demo 
+* 🌐 **Live Web Application:** [https://astromatrix.streamlit.app/](https://astromatrix.streamlit.app/)
 
 ---
 
