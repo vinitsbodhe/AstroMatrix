@@ -1,4 +1,4 @@
 streamlit
-pyswisseph
+swisseph
 matplotlib
 geopy
